@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Love You ❤️</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='35%25' r='70%25'%3E%3Cstop offset='0%25' stop-color='%23ff9abb'/%3E%3Cstop offset='45%25' stop-color='%23ff2d75'/%3E%3Cstop offset='100%25' stop-color='%23b8003d'/%3E%3C/radialGradient%3E%3Cfilter id='s' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeDropShadow dx='0' dy='4' stdDeviation='4' flood-color='%23ff2d75' flood-opacity='.55'/%3E%3C/filter%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%23050508'/%3E%3Cpath filter='url(%23s)' fill='url(%23g)' d='M32 54S9 40.5 9 23.8C9 15.6 15.1 10 22.2 10c4.4 0 7.8 2 9.8 5.1C34 12 37.4 10 41.8 10 48.9 10 55 15.6 55 23.8 55 40.5 32 54 32 54Z'/%3E%3C/svg%3E" />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #05030a;
+      --pink: #ff2d75;
+      --pink-soft: #ff7aa8;
+      --red: #ff174f;
+      --white: #fff7fb;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow: hidden;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 50% 40%, rgba(255, 45, 117, 0.18), transparent 38%),
+        radial-gradient(circle at 50% 70%, rgba(255, 23, 79, 0.15), transparent 30%),
+        linear-gradient(180deg, #09040d, var(--bg));
+    }
+
+    .stage {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      perspective: 900px;
+      padding: 24px 18px;
+      position: relative;
+    }
+
+    /* INTRO SECTION */
+    .intro {
+      text-align: center;
+      z-index: 8;
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .intro.hide {
+      opacity: 0;
+      transform: translateY(16px) scale(0.95);
+      pointer-events: none;
+    }
+
+    .main-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(42px, 8vw, 82px);
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      line-height: 1;
+      background: linear-gradient(135deg, #ffffff 30%, #ff85ab 70%, #ff2d75 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 25px rgba(255, 45, 117, 0.6));
+    }
+
+    .log {
+      margin: 24px auto 0;
+      width: min(480px, 92vw);
+      text-align: center;
+      font-size: clamp(13px, 2.2vw, 15px);
+      color: rgba(255, 170, 200, 0.85);
+      line-height: 1.8;
+      font-weight: 400;
+    }
+
+    .log-line {
+      opacity: 0;
+      transform: translateY(8px);
+      animation: lineIn 0.5s ease forwards;
+    }
+
+    .log-line:nth-child(1) { animation-delay: 0.2s; }
+    .log-line:nth-child(2) { animation-delay: 0.6s; }
+    .log-line:nth-child(3) { animation-delay: 1.0s; }
+
+    @keyframes lineIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .button {
+      margin-top: 32px;
+      border: 0;
+      border-radius: 50px;
+      padding: 15px 34px;
+      color: white;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ff2d75, #b8003d);
+      box-shadow: 
+        0 10px 32px rgba(255, 45, 117, 0.45),
+        0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: buttonIn 0.5s ease forwards 1.4s;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .button:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 
+        0 14px 40px rgba(255, 45, 117, 0.65),
+        0 0 25px rgba(255, 122, 168, 0.5);
+      filter: brightness(1.1);
+    }
+
+    @keyframes buttonIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* HEART WRAPPER */
+    .heart-wrap {
+      position: absolute;
+      width: min(92vw, 760px);
+      aspect-ratio: 1 / 0.9;
+      transform-style: preserve-3d;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .heart-wrap.show {
+      opacity: 1;
+      pointer-events: auto;
+      animation: heartAppear 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards, beat 1.8s ease-in-out infinite 1.2s;
+    }
+
+    @keyframes heartAppear {
+      from {
+        transform: rotateX(18deg) scale(0.72);
+        filter: blur(8px);
+      }
+      to {
+        transform: rotateX(0deg) scale(1);
+        filter: blur(0);
+      }
+    }
+
+    @keyframes beat {
+      0%, 100% { scale: 1; }
+      14% { scale: 1.035; }
+      28% { scale: 1; }
+      42% { scale: 1.025; }
+      70% { scale: 1; }
+    }
+
+    .heart-word {
+      position: absolute;
+      left: calc(var(--x) * 1%);
+      top: calc(var(--y) * 1%);
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      font-size: clamp(8px, 1.4vw, 13px);
+      font-weight: 600;
+      white-space: nowrap;
+      color: hsl(var(--hue), 100%, var(--light));
+      text-shadow:
+        0 0 8px rgba(255, 45, 117, 0.85),
+        0 0 22px rgba(255, 45, 117, 0.5);
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.2) rotate(var(--rot));
+      animation: wordIn 0.75s cubic-bezier(.2,.9,.2,1.15) forwards;
+      animation-delay: calc(var(--delay) * 1ms);
+      transition: filter 0.2s ease, transform 0.2s ease;
+    }
+
+    .heart-word:hover {
+      filter: brightness(1.5) drop-shadow(0 0 10px #ffffff);
+      transform: translate(-50%, -50%) scale(1.25) rotate(0deg);
+      z-index: 10;
+    }
+
+    @keyframes wordIn {
+      to {
+        opacity: var(--opacity);
+        transform: translate(-50%, -50%) scale(1) rotate(var(--rot));
+      }
+    }
+
+    .center-text {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(38px, 8vw, 76px);
+      font-weight: 600;
+      text-align: center;
+      color: white;
+      text-shadow:
+        0 0 20px rgba(255, 255, 255, 0.8),
+        0 0 40px rgba(255, 45, 117, 0.9),
+        0 0 70px rgba(255, 45, 117, 0.6);
+      opacity: 0;
+      transform: scale(0.85);
+      animation: centerIn 0.8s ease forwards 1.15s;
+      pointer-events: none;
+    }
+
+    @keyframes centerIn {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .glow {
+      position: fixed;
+      left: 50%;
+      bottom: 5%;
+      width: min(680px, 92vw);
+      height: 130px;
+      transform: translateX(-50%);
+      background: radial-gradient(ellipse, rgba(255, 45, 117, 0.38), transparent 65%);
+      filter: blur(24px);
+      pointer-events: none;
+      opacity: 0.9;
+    }
+
+    /* Particle burst on click */
+    .sparkle-particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 99;
+      font-size: 18px;
+      animation: sparkleUp 1.4s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+    }
+
+    @keyframes sparkleUp {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.6) rotate(0deg);
+      }
+      50% {
+        opacity: 0.9;
+        transform: translate(calc(-50% + var(--dx)), calc(-50% - 50px)) scale(1.2) rotate(var(--rot));
+      }
+      100% {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--dx)), calc(-50% - 110px)) scale(0.6) rotate(calc(var(--rot) * 2));
+      }
+    }
+
+    @media (max-width: 520px) {
+      .heart-wrap {
+        width: 106vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="stage" id="stage">
+    <section class="intro" id="intro">
+      <h1 class="main-title">Love you.</h1>
+      <div class="log">
+        <div class="log-line">Thinking of you today and always...</div>
+        <div class="log-line">Every moment with you is my favorite story.</div>
+        <div class="log-line">A little message is waiting for you.</div>
+      </div>
+      <button class="button" id="startBtn">OPEN MESSAGE ♡</button>
+    </section>
+
+    <section class="heart-wrap" id="heart"></section>
+    <div class="glow"></div>
+  </main>
+
+  <script>
+    const heart = document.getElementById("heart");
+    const intro = document.getElementById("intro");
+    const startBtn = document.getElementById("startBtn");
+
+    const words = ["I love you", "love you", "forever", "my heart", "you & me", "always", "<3"];
+    const points = [];
+    const step = 0.105;
+
+    for (let y = 1.35; y >= -1.25; y -= step) {
+      for (let x = -1.45; x <= 1.45; x += step) {
+        const v = Math.pow(x * x + y * y - 1, 3) - x * x * Math.pow(y, 3);
+        if (v <= 0) {
+          const px = 50 + x * 31;
+          const py = 53 - y * 35;
+          const centerBoost = 1 - Math.min(1, Math.hypot(x, y) / 1.55);
+          points.push({ x: px, y: py, boost: centerBoost });
+        }
+      }
+    }
+
+    function makeHeart() {
+      const fragment = document.createDocumentFragment();
+
+      points.forEach((point, index) => {
+        const span = document.createElement("span");
+        span.className = "heart-word";
+        span.textContent = words[(index + Math.floor(point.x)) % words.length];
+
+        const delay = Math.random() * 900 + point.y * 4;
+        const hue = 336 + Math.random() * 15;
+        const light = 52 + point.boost * 34 + Math.random() * 8;
+        const opacity = 0.58 + point.boost * 0.42;
+        const rot = (Math.random() * 10 - 5).toFixed(2) + "deg";
+
+        span.style.setProperty("--x", point.x.toFixed(3));
+        span.style.setProperty("--y", point.y.toFixed(3));
+        span.style.setProperty("--delay", delay.toFixed(0));
+        span.style.setProperty("--hue", hue.toFixed(1));
+        span.style.setProperty("--light", light.toFixed(1) + "%");
+        span.style.setProperty("--opacity", opacity.toFixed(2));
+        span.style.setProperty("--rot", rot);
+        fragment.appendChild(span);
+      });
+
+      const center = document.createElement("div");
+      center.className = "center-text";
+      center.textContent = "Love you.";
+      fragment.appendChild(center);
+
+      heart.innerHTML = "";
+      heart.appendChild(fragment);
+    }
+
+    function showHeart() {
+      makeHeart();
+      intro.classList.add("hide");
+      heart.classList.add("show");
+    }
+
+    startBtn.addEventListener("click", showHeart);
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") showHeart();
+    });
+
+    window.addEventListener("mousemove", (event) => {
+      if (!heart.classList.contains("show")) return;
+      const x = (event.clientX / window.innerWidth - 0.5) * 10;
+      const y = (event.clientY / window.innerHeight - 0.5) * -8;
+      heart.style.transform = `rotateX(${y}deg) rotateY(${x}deg)`;
+    });
+
+    // Touch support for mobile tilt
+    window.addEventListener("touchmove", (event) => {
+      if (!heart.classList.contains("show") || !event.touches[0]) return;
+      const x = (event.touches[0].clientX / window.innerWidth - 0.5) * 10;
+      const y = (event.touches[0].clientY / window.innerHeight - 0.5) * -8;
+      heart.style.transform = `rotateX(${y}deg) rotateY(${x}deg)`;
+    }, { passive: true });
+
+    // Subtle romantic click sparkles
+    const sparkles = ["💖", "✨", "💕", "💗"];
+    document.addEventListener("click", (e) => {
+      for (let i = 0; i < 3; i++) {
+        const p = document.createElement("div");
+        p.className = "sparkle-particle";
+        p.textContent = sparkles[Math.floor(Math.random() * sparkles.length)];
+        p.style.left = e.clientX + "px";
+        p.style.top = e.clientY + "px";
+        const dx = (Math.random() * 80 - 40) + "px";
+        const rot = (Math.random() * 40 - 20) + "deg";
+        p.style.setProperty("--dx", dx);
+        p.style.setProperty("--rot", rot);
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 1400);
+      }
+    });
+  </script>
+</body>
+</html>
